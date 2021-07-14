@@ -6,7 +6,7 @@ import { OrkutNostalgicIconSet } from '../src/lib/NostalgicIconSet';
 import { AlurakutMenu } from '../src/lib/AlurakutMenu';
 import { AlurakutProfileSidebarMenuDefault } from '../src/lib/ProfileSideBarDefault';
 
-//Perfil do usuário
+
 function ProfileSidebar(props) {
 
   return (
