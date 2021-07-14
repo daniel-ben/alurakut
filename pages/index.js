@@ -24,18 +24,29 @@ function ProfileSidebar(props) {
   )
 }
 
-function handleCriaComunidade(event) {
-  event.preventDefault();
-  const dadosDoForm = new FormData(e.target);
+function ProfileRelationsBox(propriedades) {
+  return (
+    <ProfileRelationsBoxWrapper>
+      <h2 className="smallTitle">
+        {propriedades.title} ({propriedades.items.length})
+      </h2>
 
-  const novaComunidade = {
-    id: new Date().toISOString(),
-    title: dadosDoForm.get('title'),
-    image: dadosDoForm.get('image')
-  };
-  
-  setComunidades(...comunidades, novaComunidade);
+      <ul>
+        {propriedades.items.map((itemAtual) => {
+          return (
+            <li key={itemAtual.id}>
+              <a href={`/users/${itemAtual}`} key={itemAtual}>
+                <img src={itemAtual.image} />
+                <span>{itemAtual.title}</span>
+              </a>
+            </li>
+          )
+        })}
+      </ul>
+    </ProfileRelationsBoxWrapper>
+  )
 }
+
 
 export default function Home() {
   const githubUser = 'daniel-ben';
@@ -50,13 +61,25 @@ export default function Home() {
   ]);
   
   const pessoasFavoritas = [
-    'peas',
-    'omariosouto',
-    'juunegreiros',
-    'CodingTrain',
-    'developedbyed',
-    'OneLoneCoder'
-  ]
+    {id:'peas', title: '', image: `https://github.com/peas.png`},
+    {id:'omariosouto', title: '', image: `https://github.com/omariosouto.png`}, 
+    {id:'juunegreiros', title: '', image: `https://github.com/juunegreiros.png`},
+    {id:'CodingTrain', title: '', image: `https://github.com/CodingTrain.png`},
+    {id:'developedbyed', title: '', image: `https://github.com/developedbyed.png`},
+    {id:'OneLoneCoder', title: '', image: `https://github.com/OneLoneCoder.png`}
+  ];
+  
+  const [seguidores, setSeguidores] = React.useState([]);
+
+  React.useEffect(() => { 
+    fetch('https://api.github.com/users/daniel-ben/followers')
+    .then((respostaDoServidor) => {
+      return respostaDoServidor.json();
+    })
+    .then((respostaCompleta) => {
+      setSeguidores(respostaCompleta);
+    })
+  }, [])
 
   return (
     <>
@@ -82,7 +105,19 @@ export default function Home() {
           {/* Criar comunidades */}
           <Box>
             <h2 className="subTitle">O que você deseja fazer?</h2>
-            <form onSubmit={handleCriaComunidade}>
+            <form onSubmit={(event) => {
+              event.preventDefault();
+              const dadosDoForm = new FormData(event.target);
+
+              const novaComunidade = {
+                id: new Date().toISOString(),
+                title: dadosDoForm.get('title'),
+                image: dadosDoForm.get('image')
+              };
+  
+                setComunidades([...comunidades, novaComunidade]);
+              }}>
+
               <div>
                 <input  
                   placeholder="Qual vai ser o nome da sua comunidade?" 
@@ -92,7 +127,7 @@ export default function Home() {
               <div>
                 <input  
                   placeholder="Qual vai ser o nome da sua comunidade?" 
-                  name="title" 
+                  name="image" 
                   aria-label="" />
               </div>
 
@@ -105,43 +140,12 @@ export default function Home() {
 
         {/* comunidades */}
         <div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
-          <ProfileRelationsBoxWrapper>
-            <h2 h2 className="smallTitle">
-              Comunidades ({comunidades.length})
-            </h2>
+            
+          <ProfileRelationsBox title="Seguidores" items={seguidores} />
 
-            <ul>
-              {comunidades.map((itemAtual) => {
-                return (
-                  <li key={itemAtual.id}>
-                    <a href={`/users/${itemAtual}`} key={itemAtual}>
-                      <img src={itemAtual.image} />
-                      <span>{itemAtual.title}</span>
-                    </a>
-                  </li>
-                )
-              })}
-            </ul>
-          </ProfileRelationsBoxWrapper>
+          <ProfileRelationsBox title="Comunidades" items={comunidades} />
 
-          <ProfileRelationsBoxWrapper>
-            <h2 className="smallTitle">
-              Pessoas da comunidade ({pessoasFavoritas.length})
-            </h2>
-
-            <ul>
-              {pessoasFavoritas.map((itemAtual) => {
-                return (
-                  <li key={itemAtual}>
-                    <a href={`/users/${itemAtual}`} key={itemAtual}>
-                      <img src={`https://github.com/${itemAtual}.png`} />
-                      <span>{itemAtual}</span>
-                    </a>
-                  </li>
-                )
-              })}
-            </ul>
-          </ProfileRelationsBoxWrapper>
+          <ProfileRelationsBox title="Pessoas da Comunidade" items={pessoasFavoritas} />
         </div>
       </MainGrid>
     </>
