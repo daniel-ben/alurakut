@@ -7,6 +7,8 @@ import { AlurakutMenu } from '../src/lib/AlurakutMenu';
 import { AlurakutProfileSidebarMenuDefault } from '../src/lib/ProfileSideBarDefault';
 
 
+const token = "3326b7e465b9ed3710729f961963a2";
+
 function ProfileSidebar(props) {
 
   return (
@@ -34,7 +36,7 @@ function ProfileRelationsBox(propriedades) {
       <ul>
         {propriedades.items.map((itemAtual) => {
           if(!itemAtual.avatar_url) {
-            itemAtual.avatar_url = itemAtual.image;
+            itemAtual.avatar_url = itemAtual.imageUrl;
           }
           return (
             <li key={itemAtual.id}>
@@ -50,6 +52,8 @@ function ProfileRelationsBox(propriedades) {
   )
 }
 
+
+//### NOTE : Armazenar em um arquivo a parte depois
 function getFromApi(setLista, user, url) {
   fetch(`https://api.github.com/users/${user}/${url}`)
   .then((respostaDoServidor) => {
@@ -60,25 +64,46 @@ function getFromApi(setLista, user, url) {
   })
 }
 
+function getFromDato(setComunidades) {
+  fetch(
+    'https://graphql.datocms.com/',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        query: '{ allCommunities { id, title, imageUrl } }'
+      }),
+    }
+  )
+  .then(res => res.json())
+  .then((res) => {
+    console.log(res);
+    setComunidades(res.data.allCommunities);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}
+
+
 export default function Home() {
+
   const githubUser = 'daniel-ben';
   
   const [following, setFollowing] = React.useState([]);
   
   const [followers, setFollowers] = React.useState([]);
 
-  const [comunidades, setComunidades] = React.useState([
-    {id: '4613516849649863', title: 'Eu odeio acordar cedo', image: 'https://alurakut.vercel.app/capa-comunidade-01.jpg'},
-    {id: '1234541135416221', title: 'Meu gato tem um plano maligno', image: 'https://images.pexels.com/photos/208984/pexels-photo-208984.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'},
-    {id: '1234116216152464', title: 'Gatos maromba', image: 'https://pbs.twimg.com/media/EO_F5vOX0AE8dRO.jpg'},
-    {id: '9187349712934719', title: 'Pruuu', image: 'https://as1.ftcdn.net/v2/jpg/00/87/68/90/1000_F_87689025_1uP2VjzVIEIXvlGSpGmeTbtTTLGel2ed.jpg'},
-    {id: '1928374912374981', title: 'Capivara no spa', image: 'https://as2.ftcdn.net/v2/jpg/01/78/54/17/1000_F_178541736_O0UX5H3tQMw7s8BZwyys3jqybEUixFwC.jpg'},
-    {id: '6254472634855123', title: 'Eu amo churros', image: 'https://as2.ftcdn.net/v2/jpg/02/86/53/65/1000_F_286536586_NrXiCQC8TrhinMRzkPX0yxo0kSzrIdTW.jpg'},
-  ]);
+  const [comunidades, setComunidades] = React.useState([]);
 
   React.useEffect(() => { 
     getFromApi(setFollowing, 'daniel-ben', 'following');
     getFromApi(setFollowers, 'daniel-ben', 'followers');
+    getFromDato(setComunidades);
   }, [])
 
   return (
