@@ -6,8 +6,7 @@ import { OrkutNostalgicIconSet } from '../src/lib/NostalgicIconSet';
 import { AlurakutMenu } from '../src/lib/AlurakutMenu';
 import { AlurakutProfileSidebarMenuDefault } from '../src/lib/ProfileSideBarDefault';
 
-
-const token = "3326b7e465b9ed3710729f961963a2";
+const TOKEN = "3326b7e465b9ed3710729f961963a2";
 
 function ProfileSidebar(props) {
 
@@ -34,7 +33,7 @@ function ProfileRelationsBox(propriedades) {
       </h2>
 
       <ul>
-        {propriedades.items.map((itemAtual) => {
+        {propriedades.items.slice(0,6).map((itemAtual) => {
           if(!itemAtual.avatar_url) {
             itemAtual.avatar_url = itemAtual.imageUrl;
           }
@@ -54,7 +53,7 @@ function ProfileRelationsBox(propriedades) {
 
 
 //### NOTE : Armazenar em um arquivo a parte depois
-function getFromApi(setLista, user, url) {
+function fetchFromApi(setLista, user, url) {
   fetch(`https://api.github.com/users/${user}/${url}`)
   .then((respostaDoServidor) => {
     return respostaDoServidor.json();
@@ -64,7 +63,7 @@ function getFromApi(setLista, user, url) {
   })
 }
 
-function getFromDato(setComunidades) {
+function fetchFromDato(setComunidades) {
   fetch(
     'https://graphql.datocms.com/',
     {
@@ -72,16 +71,19 @@ function getFromDato(setComunidades) {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${TOKEN}`,
       },
-      body: JSON.stringify({
-        query: '{ allCommunities { id, title, imageUrl } }'
-      }),
+      body: JSON.stringify({ query: 
+        `{ allCommunities { 
+            id, 
+            title, 
+            imageUrl,
+            creatorSlug
+          } }`}),
     }
   )
   .then(res => res.json())
   .then((res) => {
-    console.log(res);
     setComunidades(res.data.allCommunities);
   })
   .catch((error) => {
@@ -101,9 +103,10 @@ export default function Home() {
   const [comunidades, setComunidades] = React.useState([]);
 
   React.useEffect(() => { 
-    getFromApi(setFollowing, 'daniel-ben', 'following');
-    getFromApi(setFollowers, 'daniel-ben', 'followers');
-    getFromDato(setComunidades);
+    fetchFromApi(setFollowing, githubUser, 'following');
+    fetchFromApi(setFollowers, githubUser, 'followers');
+    fetchFromDato(setComunidades);
+    
   }, [])
 
   return (
@@ -134,13 +137,25 @@ export default function Home() {
               event.preventDefault();
               const dadosDoForm = new FormData(event.target);
 
-              const novaComunidade = {
-                id: new Date().toISOString(),
+              const comunidade = {
                 title: dadosDoForm.get('title'),
-                image: dadosDoForm.get('image')
+                imageUrl: dadosDoForm.get('image'),
+                creatorSlug: githubUser,
               };
-  
-                setComunidades([...comunidades, novaComunidade]);
+
+              fetch('/api/comunidades', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(comunidade)
+              })
+              .then(async (response) => {
+                const dados = await response.json();
+                const comunidade = dados.registroCriado;
+                setComunidades([...comunidades, comunidade]);
+              })
+
               }}>
 
               <div>
