@@ -33,10 +33,13 @@ function ProfileRelationsBox(propriedades) {
 
       <ul>
         {propriedades.items.map((itemAtual) => {
+          if(!itemAtual.avatar_url) {
+            itemAtual.avatar_url = itemAtual.image;
+          }
           return (
             <li key={itemAtual.id}>
-              <a href={`/users/${itemAtual}`} key={itemAtual}>
-                <img src={itemAtual.image} />
+              <a href={itemAtual.url}>
+                <img src={itemAtual.avatar_url} />
                 <span>{itemAtual.title}</span>
               </a>
             </li>
@@ -47,10 +50,23 @@ function ProfileRelationsBox(propriedades) {
   )
 }
 
+function getFromApi(setLista, user, url) {
+  fetch(`https://api.github.com/users/${user}/${url}`)
+  .then((respostaDoServidor) => {
+    return respostaDoServidor.json();
+  })
+  .then((respostaCompleta) => {
+    setLista(respostaCompleta);
+  })
+}
 
 export default function Home() {
   const githubUser = 'daniel-ben';
   
+  const [following, setFollowing] = React.useState([]);
+  
+  const [followers, setFollowers] = React.useState([]);
+
   const [comunidades, setComunidades] = React.useState([
     {id: '4613516849649863', title: 'Eu odeio acordar cedo', image: 'https://alurakut.vercel.app/capa-comunidade-01.jpg'},
     {id: '1234541135416221', title: 'Meu gato tem um plano maligno', image: 'https://images.pexels.com/photos/208984/pexels-photo-208984.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'},
@@ -59,26 +75,10 @@ export default function Home() {
     {id: '1928374912374981', title: 'Capivara no spa', image: 'https://as2.ftcdn.net/v2/jpg/01/78/54/17/1000_F_178541736_O0UX5H3tQMw7s8BZwyys3jqybEUixFwC.jpg'},
     {id: '6254472634855123', title: 'Eu amo churros', image: 'https://as2.ftcdn.net/v2/jpg/02/86/53/65/1000_F_286536586_NrXiCQC8TrhinMRzkPX0yxo0kSzrIdTW.jpg'},
   ]);
-  
-  const pessoasFavoritas = [
-    {id:'peas', title: '', image: `https://github.com/peas.png`},
-    {id:'omariosouto', title: '', image: `https://github.com/omariosouto.png`}, 
-    {id:'juunegreiros', title: '', image: `https://github.com/juunegreiros.png`},
-    {id:'CodingTrain', title: '', image: `https://github.com/CodingTrain.png`},
-    {id:'developedbyed', title: '', image: `https://github.com/developedbyed.png`},
-    {id:'OneLoneCoder', title: '', image: `https://github.com/OneLoneCoder.png`}
-  ];
-  
-  const [seguidores, setSeguidores] = React.useState([]);
 
   React.useEffect(() => { 
-    fetch('https://api.github.com/users/daniel-ben/followers')
-    .then((respostaDoServidor) => {
-      return respostaDoServidor.json();
-    })
-    .then((respostaCompleta) => {
-      setSeguidores(respostaCompleta);
-    })
+    getFromApi(setFollowing, 'daniel-ben', 'following');
+    getFromApi(setFollowers, 'daniel-ben', 'followers');
   }, [])
 
   return (
@@ -126,7 +126,7 @@ export default function Home() {
               </div>
               <div>
                 <input  
-                  placeholder="Qual vai ser o nome da sua comunidade?" 
+                  placeholder="Coloque uma URL para usarmos de capa" 
                   name="image" 
                   aria-label="" />
               </div>
@@ -138,14 +138,14 @@ export default function Home() {
           </Box>
         </div>
 
-        {/* comunidades */}
+        {/* Lateral Direita */}
         <div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
             
-          <ProfileRelationsBox title="Seguidores" items={seguidores} />
+          <ProfileRelationsBox title="Seguidores" items={followers} />
 
           <ProfileRelationsBox title="Comunidades" items={comunidades} />
 
-          <ProfileRelationsBox title="Pessoas da Comunidade" items={pessoasFavoritas} />
+          <ProfileRelationsBox title="Pessoas da Comunidade" items={following} />
         </div>
       </MainGrid>
     </>
