@@ -11,8 +11,7 @@ export default async function recebedorDeRequests(request, response) {
       itemType: "967802",
       ...request.body,
     })
-    console.log(registroCriado)
-    
+
     response.json({
       registroCriado: registroCriado, 
     })

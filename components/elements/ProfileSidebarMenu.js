@@ -6,11 +6,11 @@ const v = '1';
 
 
 // ================================================================================================================
-// AlurakutProfileSidebarMenuDefault
+// ProfileSidebarMenu
 // ================================================================================================================
-export function AlurakutProfileSidebarMenuDefault() {
+function ProfileSidebarMenu() {
   return (
-    <AlurakutProfileSidebarMenuDefault.Wrapper>
+    <ProfileSidebarMenu.Wrapper>
       <nav>
         <a href="/">
           <img src={`${BASE_URL}/icons/user.svg`} />
@@ -40,10 +40,15 @@ export function AlurakutProfileSidebarMenuDefault() {
             Sair
           </a>
       </nav>
-    </AlurakutProfileSidebarMenuDefault.Wrapper>
+    </ProfileSidebarMenu.Wrapper>
   )
 }
-AlurakutProfileSidebarMenuDefault.Wrapper = styled.div`
+
+// ================================================================================================================
+// CSS
+// ================================================================================================================
+
+ProfileSidebarMenu.Wrapper = styled.div`
   a {
     font-size: 12px;
     color: #2E7BB4;
@@ -59,3 +64,5 @@ AlurakutProfileSidebarMenuDefault.Wrapper = styled.div`
     }
   }
 `;
+
+export default ProfileSidebarMenu

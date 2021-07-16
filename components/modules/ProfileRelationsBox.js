@@ -1,5 +1,33 @@
 import styled from 'styled-components';
-import Box from '../Box';
+import Box from '../elements/Box';
+
+
+function ProfileRelationsBox(propriedades) {
+  return (
+    <ProfileRelationsBoxWrapper>
+      <h2 className="smallTitle">
+        {propriedades.title} ({propriedades.items.length})
+      </h2>
+
+      <ul>
+        {propriedades.items.slice(0,6).map((itemAtual) => {
+          if(!itemAtual.avatar_url) {
+            itemAtual.avatar_url = itemAtual.imageUrl;
+          }
+          return (
+            <li key={itemAtual.id}>
+              <a href={itemAtual.url}>
+                <img src={itemAtual.avatar_url} />
+                <span>{itemAtual.title}</span>
+              </a>
+            </li>
+          )
+        })}
+      </ul>
+    </ProfileRelationsBoxWrapper>
+  )
+}
+
 
 const ProfileRelationsBoxWrapper = styled(Box)`
   ul {
@@ -51,4 +79,4 @@ const ProfileRelationsBoxWrapper = styled(Box)`
   }
 `;
 
-export default ProfileRelationsBoxWrapper;
+export default ProfileRelationsBox;

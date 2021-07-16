@@ -1,11 +1,57 @@
 import styled from 'styled-components'
+import React from 'react';
+import Link from '../elements/NextLink';
+import HeaderProfileSidebar from '../modules/HeaderProfileSidebar';
+
 
 const BASE_URL = 'http://alurakut.vercel.app/';
+const v = '1'
 
-export const AlurakutMenuWrapper = styled.header`
+// ================================================================================================================
+// Menu
+// ================================================================================================================
+function AlurakutHeader({ githubUser }) {
+  const [isMenuOpen, setMenuState] = React.useState(false);
+  return (
+    <AlurakutHeaderWrapper isMenuOpen={isMenuOpen}>
+      <div className="container">
+        <AlurakutHeaderLogo src={`${BASE_URL}/logo.svg`} />
+
+        <nav style={{ flex: 1 }}>
+          {[{ name: 'Inicio', slug: '/'}, {name: 'Amigos', slug: '/amigos'}, {name: 'Comunidades', slug: '/comunidades'}].map((menuItem) => (
+            <Link key={`key__${menuItem.name.toLocaleLowerCase()}`} href={`${menuItem.slug.toLocaleLowerCase()}`}>
+              {menuItem.name}
+            </Link>
+          ))}
+        </nav>
+
+        <nav>
+          <a href={`/logout`}>
+            Sair
+          </a>
+          <div>
+            <input placeholder="Pesquisar no Orkut" />
+          </div>
+        </nav>
+
+        <button onClick={() => setMenuState(!isMenuOpen)}>
+          {isMenuOpen && <img src={`${BASE_URL}/icons/menu-open.svg?v=${v}`} />}
+          {!isMenuOpen && <img src={`${BASE_URL}/icons/menu-closed.svg?v=${v}`} />}
+        </button>
+      </div>
+      <HeaderProfileSidebar githubUser={githubUser} />
+    </AlurakutHeaderWrapper>
+  )
+}
+
+
+// ================================================================================================================
+// CSS with styled components
+// ================================================================================================================
+const AlurakutHeaderWrapper = styled.header`
   width: 100%;
   background-color: #308BC5;
-  .alurakutMenuProfileSidebar {
+  .HeaderProfileSidebar {
     background: white;
     position: fixed;
     z-index: 100;
@@ -106,10 +152,11 @@ export const AlurakutMenuWrapper = styled.header`
   }
 `;
 
-export const AlurakutMenuLogo = styled.img`
+const AlurakutHeaderLogo = styled.img`
   background-color: #ffffff;
   padding: 9px 14px;
   border-radius: 1000px;
   height: 34px;
 `;
 
+export default AlurakutHeader;
