@@ -40,6 +40,11 @@ const Box = styled.div`
     border-bottom-color: #ECF2FA;
   }
 
+  a, a:visited, a:active {
+    color: #EEE;
+    text-decoration: none;
+  }
+
   input { 
     width: 100%;
     background-color: #F4F4F4;

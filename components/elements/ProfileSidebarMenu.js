@@ -5,33 +5,34 @@ const BASE_URL = 'http://alurakut.vercel.app/';
 const v = '1';
 
 
-// ================================================================================================================
-// ProfileSidebarMenu
-// ================================================================================================================
 function ProfileSidebarMenu() {
   return (
     <ProfileSidebarMenu.Wrapper>
       <nav>
-        <a href="/">
+        <a href="https://alurakut-one-snowy.vercel.app">
           <img src={`${BASE_URL}/icons/user.svg`} />
             Perfil
+          </a>
+        <a href="https://www.instagram.com/nyanlatotep/">
+          <img src={`${BASE_URL}/icons/camera.svg`} />
+            Instagram
+          </a>
+        <a href="https://www.instagram.com/nyanlatotep/">
+          <img src={`${BASE_URL}/icons/camera.svg`} />
+            Twitter
+          </a>  
+        <a href="https://myportfolio-eosin.vercel.app">
+          <img src={`${BASE_URL}/icons/sun.svg`} />
+            Portfolio
           </a>
         <a href="/">
           <img src={`${BASE_URL}/icons/book.svg`} />
             Recados
           </a>
-        <a href="/">
-          <img src={`${BASE_URL}/icons/camera.svg`} />
-            Fotos
-          </a>
-        <a href="/">
-          <img src={`${BASE_URL}/icons/sun.svg`} />
-            Depoimentos
-          </a>
       </nav>
       <hr />
       <nav>
-        <a href="/">
+        <a href="https://github.com/explore">
           <img src={`${BASE_URL}/icons/plus.svg`} />
             GitHub Trends
           </a>

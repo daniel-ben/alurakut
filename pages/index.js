@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
+//templates
 import AlurakutHeader from '../components/templates/AlurakutHeader';
 import MainGrid from '../components/templates/MainGrid';
-//layouts
+
 
 export default function Home() {
   const githubUser = 'daniel-ben';
