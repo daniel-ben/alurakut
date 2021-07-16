@@ -12,7 +12,6 @@ import AlurakutHeader from '../components/templates/AlurakutHeader';
 import MainGrid from '../components/templates/MainGrid';
 //layouts
 
-const READ_ONLY_TOKEN = tokens.READ_ONLY;
 
 //### NOTE : Armazenar em um arquivo a parte depois
 function fetchFromApi(setLista, user, url) {
@@ -33,7 +32,7 @@ function fetchFromDato(setComunidades) {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': `Bearer ${READ_ONLY_TOKEN}`,
+        'Authorization': `Bearer ${tokens.READ_ONLY}`,
       },
       body: JSON.stringify({ query: 
         `{ allCommunities { 
