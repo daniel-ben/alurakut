@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+//constants
+import tokens from '../config.js';
 //modules
 import NovaComunidadeForm from '../components/modules/NovaComunidadeForm';
 import WelcomeArea from '../components/modules/WelcomeArea';
@@ -10,7 +12,7 @@ import AlurakutHeader from '../components/templates/AlurakutHeader';
 import MainGrid from '../components/templates/MainGrid';
 //layouts
 
-const TOKEN = "3326b7e465b9ed3710729f961963a2";
+const READ_ONLY_TOKEN = tokens.READ_ONLY;
 
 //### NOTE : Armazenar em um arquivo a parte depois
 function fetchFromApi(setLista, user, url) {
@@ -31,7 +33,7 @@ function fetchFromDato(setComunidades) {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': `Bearer ${TOKEN}`,
+        'Authorization': `Bearer ${READ_ONLY_TOKEN}`,
       },
       body: JSON.stringify({ query: 
         `{ allCommunities { 
