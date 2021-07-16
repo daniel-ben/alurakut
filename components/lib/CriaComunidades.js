@@ -1,12 +1,12 @@
 
-function CriaComunidades(event, comunidades) {
-  event.preventDefault();
+function CriaComunidades(comunidades, setComunidades) {
   const dadosDoForm = new FormData(event.target);
 
   const comunidade = {
     title: dadosDoForm.get('title'),
     imageUrl: dadosDoForm.get('image'),
-    creatorSlug: githubUser,
+    creatorSlug: 'daniel-ben',
+    linkTo: '',
   };
 
   fetch('/api/comunidades', {

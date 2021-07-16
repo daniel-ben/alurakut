@@ -41,7 +41,7 @@ function MainGrid(props) {
           <WelcomeArea />
 
           {/* Criar comunidades */}
-          <NovaComunidadeForm />
+          <NovaComunidadeForm comunidades={comunidades} setComunidades={setComunidades}/>
         </div>
 
         {/* Lateral Direita */}

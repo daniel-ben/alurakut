@@ -1,11 +1,15 @@
 import Box from '../elements/Box';
 import CriaComunidades from '../lib/CriaComunidades';
 
-function NovaComunidadeForm() {
+
+function NovaComunidadeForm(props) {
   return (
     <Box>
       <h2 className="subTitle">O que você deseja fazer?</h2>
-      <form onSubmit={CriaComunidades}>
+      <form onSubmit={(event) => {
+        event.preventDefault();
+        CriaComunidades(props.comunidades, props.setComunidades)
+      }}>
 
         <div>
           <input  
