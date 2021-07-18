@@ -23,7 +23,7 @@ export default function Home(props) {
 }
 
 //backend side
-/* export async function getServerSideProps(context) {
+export async function getServerSideProps(context) {
   const cookies = nookies.get(context);
   const token = cookies.USER_TOKEN;
   let isAuthenticated = false;
@@ -65,4 +65,4 @@ export default function Home(props) {
       githubUser: 'daniel-ben'
     }, //will be passed to the page component as props
   }
-} */
+}

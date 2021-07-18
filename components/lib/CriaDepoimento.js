@@ -5,6 +5,7 @@ function CriaDepoimento(depoimentos, setDepoimentos, githubUser) {
     title: dadosDoForm.get('title'),
     content: dadosDoForm.get('content'),
     creatorSlug: githubUser,
+    imageUrl: `https://github.com/${githubUser}.png`,
   };
 
   fetch('/api/depoimentos', {
