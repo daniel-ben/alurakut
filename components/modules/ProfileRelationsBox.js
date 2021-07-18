@@ -13,10 +13,11 @@ function ProfileRelationsBox(propriedades) {
         {propriedades.items.slice(0,6).map((itemAtual) => {
           if(!itemAtual.avatar_url) {
             itemAtual.avatar_url = itemAtual.imageUrl;
+            itemAtual.html_url = itemAtual.linkTo;
           }
           return (
             <li key={itemAtual.id}>
-              <a href={itemAtual.linkTo}>
+              <a href={itemAtual.html_url}>
                 <img src={itemAtual.avatar_url} />
                 <span>{itemAtual.title}</span>
               </a>

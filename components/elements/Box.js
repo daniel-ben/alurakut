@@ -68,13 +68,20 @@ const Box = styled.div`
     padding: 8px 12px;
     color: #FFFFFF;
     border-radius: 10000px; 
-    background-color: #0071BF;
+    /* background-color: #0B4CD6; */
+    background-color: #943255;
   }
 
   .randomButton {
     margin-left: 2%;
     padding: 10px 12px;
     width: 18%;
+  }
+
+  .options-div {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-around;
   }
 `;
 

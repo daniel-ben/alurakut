@@ -5,6 +5,8 @@ import tokens from '../../config.js';
 //functions
 import fetchFromApi from '../lib/FetchFromApi.js';
 import fetchFromDato from '../lib/FetchFromDato.js';
+//elements
+import Box from '../elements/Box.js';
 //modules
 import NovaComunidadeForm from '../modules/NovaComunidadeForm';
 import WelcomeArea from '../modules/WelcomeArea';
@@ -24,7 +26,6 @@ function MainGrid(props) {
     fetchFromApi(setFollowing, props.githubUser, 'following');
     fetchFromApi(setFollowers, props.githubUser, 'followers');
     fetchFromDato(setComunidades, tokens.READ_ONLY);
-    
   }, [])
 
   return (
@@ -40,8 +41,19 @@ function MainGrid(props) {
         <div className="welcomeArea" style={{ gridArea: 'welcomeArea' }}>
           <WelcomeArea />
 
-          {/* Criar comunidades */}
-          <NovaComunidadeForm comunidades={comunidades} setComunidades={setComunidades}/>
+          {/* O que deseja fazer */}
+          <Box>
+            <h2 className="subTitle">O que você deseja fazer?</h2>
+
+            <div className="options-div">
+              <button className="opçõesButton">Criar comunidade</button>
+              <button className="opçõesButton">Escrever depoimento</button>
+              <button className="opçõesButton">Deixar um scrap</button>
+            </div>
+            <hr/>
+            
+            <NovaComunidadeForm comunidades={comunidades} setComunidades={setComunidades}/>
+          </Box>
         </div>
 
         {/* Lateral Direita */}
