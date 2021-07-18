@@ -9,7 +9,6 @@ import MainGrid from '../components/templates/MainGrid';
 
 
 export default function Home(props) {
-  const githubUser = 'daniel-ben'
 
   return (
     <>
@@ -23,13 +22,13 @@ export default function Home(props) {
 }
 
 //backend side
-/* export async function getServerSideProps(context) {
+export async function getServerSideProps(context) {
   const cookies = nookies.get(context);
   const token = cookies.USER_TOKEN;
   let isAuthenticated = false;
+  const githubUser = jwt.decode(token).githubUser;
   
-  if(token) {
-    const githubUser = jwt.decode(token).githubUser;
+/*   if(token) {
     
     fetch(`https://api.github.com/users/${githubUser}`,)
     .then((resposta) => resposta.json())
@@ -58,11 +57,11 @@ export default function Home(props) {
       }, //will be passed to the page component as props
     }
   
-  }
+  } */
 
   return {
     props: {
-      githubUser: 'daniel-ben'
+      githubUser: githubUser
     }, //will be passed to the page component as props
   }
-} */
+} 
