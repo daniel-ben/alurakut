@@ -63,6 +63,16 @@ const Box = styled.div`
     width: 80%;
   }
 
+  textarea {
+    border-radius: 20px;
+    border-style: none;
+    font-size: .8rem;
+    height: 15em;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%;
+  }
+
   button {
     border: 0;
     padding: 8px 12px;

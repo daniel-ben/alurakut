@@ -1,5 +1,4 @@
 import React from 'react';
-import Box from '../elements/Box';
 import CriaComunidades from '../lib/CriaComunidades';
 
 

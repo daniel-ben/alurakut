@@ -8,6 +8,7 @@ import fetchFromDato from '../lib/FetchFromDato.js';
 //elements
 import Box from '../elements/Box.js';
 //modules
+import NovoDepoimento from '../modules/NovoDepoimento.js';
 import NovaComunidadeForm from '../modules/NovaComunidadeForm';
 import WelcomeArea from '../modules/WelcomeArea';
 import ProfileSidebar from '../modules/ProfileSidebar';
@@ -17,10 +18,20 @@ import ProfileRelationsBox from '../modules/ProfileRelationsBox';
 function MainGrid(props) {
 
   const [following, setFollowing] = React.useState([]);
-
   const [followers, setFollowers] = React.useState([]);
-
   const [comunidades, setComunidades] = React.useState([]);
+  const [depoimentos, setDepoimentos] = React.useState([]);
+
+  const [opção_selecionada, setOpçao] = React.useState();
+
+  const opções = [
+     <NovaComunidadeForm  comunidades={comunidades} 
+                          setComunidades={setComunidades}/>,
+     <NovoDepoimento  depoimentos={depoimentos} 
+                      setDepoimentos={setDepoimentos} 
+                      githubUser={props.githubUser}/>,
+     ''
+  ]
 
   React.useEffect(() => { 
     fetchFromApi(setFollowing, props.githubUser, 'following');
@@ -46,13 +57,22 @@ function MainGrid(props) {
             <h2 className="subTitle">O que você deseja fazer?</h2>
 
             <div className="options-div">
-              <button className="opçõesButton">Criar comunidade</button>
-              <button className="opçõesButton">Escrever depoimento</button>
-              <button className="opçõesButton">Deixar um scrap</button>
+              <button className="opções-button" autoFocus
+                      onClick={(event) => {
+                        setOpçao(0);
+                      }}>Criar comunidade</button>
+              <button className="opções-button" 
+                      onClick={(event) => {
+                        setOpçao(1);
+                      }}>Escrever depoimento</button>
+              <button className="opções-button" 
+                      onClick={(event) => {
+                      setOpçao(2);
+                      }}>Deixar um scrap</button>
             </div>
             <hr/>
             
-            <NovaComunidadeForm comunidades={comunidades} setComunidades={setComunidades}/>
+            {opções[opção_selecionada]}
           </Box>
         </div>
 
