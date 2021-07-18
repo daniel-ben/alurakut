@@ -13,6 +13,7 @@ function fetchFromDato(setComunidades, token) {
             id, 
             title, 
             imageUrl,
+            linkTo,
             creatorSlug
           } }`}),
     }

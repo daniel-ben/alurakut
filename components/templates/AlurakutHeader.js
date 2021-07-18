@@ -50,7 +50,7 @@ function AlurakutHeader({ githubUser }) {
 // ================================================================================================================
 const AlurakutHeaderWrapper = styled.header`
   width: 100%;
-  background-color: #308BC5;
+  background-color: #0B4CD6;
   .HeaderProfileSidebar {
     background: white;
     position: fixed;
@@ -89,7 +89,7 @@ const AlurakutHeaderWrapper = styled.header`
     }
   }
   .container {
-    background-color: #308BC5;
+    background-color: #0B4CD6;
     padding: 7px 16px;
     max-width: 1110px;
     margin: auto;
@@ -136,7 +136,7 @@ const AlurakutHeaderWrapper = styled.header`
     }
     input {
       color: #ffffff;
-      background: #5579A1;
+      background: #0BB7D6;
       padding: 10px 42px;
       border: 0;
       background-image: url(${`${BASE_URL}/icons/search.svg`});

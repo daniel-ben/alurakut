@@ -59,12 +59,22 @@ const Box = styled.div`
     }
   }
 
+  .image-input {
+    width: 80%;
+  }
+
   button {
     border: 0;
     padding: 8px 12px;
     color: #FFFFFF;
     border-radius: 10000px; 
-    background-color: #6F92BB;
+    background-color: #0071BF;
+  }
+
+  .randomButton {
+    margin-left: 2%;
+    padding: 10px 12px;
+    width: 18%;
   }
 `;
 

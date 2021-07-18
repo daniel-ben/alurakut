@@ -16,7 +16,7 @@ function ProfileRelationsBox(propriedades) {
           }
           return (
             <li key={itemAtual.id}>
-              <a href={itemAtual.url}>
+              <a href={itemAtual.linkTo}>
                 <img src={itemAtual.avatar_url} />
                 <span>{itemAtual.title}</span>
               </a>

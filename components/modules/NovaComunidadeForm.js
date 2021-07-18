@@ -3,6 +3,8 @@ import CriaComunidades from '../lib/CriaComunidades';
 
 
 function NovaComunidadeForm(props) {
+  let input_value = '';
+
   return (
     <Box>
       <h2 className="subTitle">O que você deseja fazer?</h2>
@@ -19,9 +21,17 @@ function NovaComunidadeForm(props) {
         </div>
         <div>
           <input  
+            className='image-input'
             placeholder="Coloque uma URL para usarmos de capa" 
             name="image" 
-            aria-label="" />
+            aria-label=""/>
+          <button className="randomButton"
+                  onClick={(event) => {
+                    event.preventDefault();
+
+                  }}
+            >Random
+          </button>
         </div>
 
         <button>

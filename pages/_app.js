@@ -10,9 +10,13 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     font-family: sans-serif;
-    background-color: rgba(100, 100, 100, 0.9);
-    background-image: url("https://dkrn4sk0rn31v.cloudfront.net/uploads/2019/09/05155108/React-Hooks.png");
-/*     background-image: url("../src/cateyes.svg") ; */
+    //react hook wallpaper
+//  background-image: url("https://dkrn4sk0rn31v.cloudfront.net/uploads/2019/09/05155108/React-Hooks.png");
+    //zelda botw wallpaper
+    background: url("https://cdn.wallpapersafari.com/73/40/u4rW8T.jpg") no-repeat fixed center; 
+    //majora wallpaper
+//  background: url("https://wallpapercave.com/wp/wp9037152.jpg") no-repeat fixed center;
+    background-size: min-width(100%) 100vh;
   }
   .background-box {
     width: 30vw;
