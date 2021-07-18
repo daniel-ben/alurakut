@@ -25,43 +25,29 @@ export default function Home(props) {
 export async function getServerSideProps(context) {
   const cookies = nookies.get(context);
   const token = cookies.USER_TOKEN;
-  let isAuthenticated = false;
-  const githubUser = jwt.decode(token).githubUser;
-  
-/*   if(token) {
-    
-    fetch(`https://api.github.com/users/${githubUser}`,)
-    .then((resposta) => resposta.json())
-    .then((resultado) => {
-      console.log(resultado)
-      if (resultado.login) {
-        console.log('batata')
-        isAuthenticated = true;
-        router.push('/')
-        }
-      }
-    )
-  }
+  const { githubUser } = jwt.decode(token);
+
+  const { isAuthenticated } = await fetch('http://localhost:3000/api/auth', {
+    headers: {
+      Authorization: token
+    }
+  })
+  .then((resposta) => resposta.json())
 
   if(!isAuthenticated) {
+    console.log('o user dado não existe')
     return {
       redirect: {
         destination: '/login',
         permanent: false,
       }
     }
-  } else {
-    return {
-      props: {
-        githubUser: 'daniel-ben'
-      }, //will be passed to the page component as props
-    }
-  
-  } */
+  }
+   
 
   return {
     props: {
-      githubUser: githubUser
+      githubUser
     }, //will be passed to the page component as props
   }
 } 
