@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
 
 const BASE_URL = 'http://alurakut.vercel.app/';
@@ -6,24 +7,29 @@ const v = '1';
 
 
 function ProfileSidebarMenu() {
+  const router = useRouter();
   return (
     <ProfileSidebarMenu.Wrapper>
       <nav>
-        <a href="https://alurakut-one-snowy.vercel.app">
+        <a onClick={() => router.push('/')}>
           <img src={`${BASE_URL}/icons/user.svg`} />
             Perfil
+          </a>
+        <a href="https://myportfolio-eosin.vercel.app">
+          <img src={`${BASE_URL}/icons/user.svg`} />
+            Portfolio
           </a>
         <a href="https://www.instagram.com/nyanlatotep/">
           <img src={`${BASE_URL}/icons/camera.svg`} />
             Instagram
           </a>
-        <a href="https://www.instagram.com/nyanlatotep/">
+        <a href="https://twitter.com/tenente_dann">
           <img src={`${BASE_URL}/icons/camera.svg`} />
             Twitter
           </a>  
-        <a href="https://myportfolio-eosin.vercel.app">
+        <a href="">
           <img src={`${BASE_URL}/icons/sun.svg`} />
-            Portfolio
+            Depoimentos
           </a>
         <a href="/">
           <img src={`${BASE_URL}/icons/book.svg`} />

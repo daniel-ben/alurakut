@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Box = styled.div`
-  background: rgba(250, 250, 250, 0.5);
+  background: rgba(250, 250, 250, 0.4);
   border-radius: 8px;
   margin-bottom: 10px;
   padding: 16px;
@@ -79,7 +79,7 @@ const Box = styled.div`
     color: #FFFFFF;
     border-radius: 10000px; 
     /* background-color: #0B4CD6; */
-    background-color: #943255;
+    background-color: #2D4029;
   }
 
   .randomButton {

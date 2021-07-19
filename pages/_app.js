@@ -10,13 +10,15 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     font-family: sans-serif;
-    //react hook wallpaper
-//  background-image: url("https://dkrn4sk0rn31v.cloudfront.net/uploads/2019/09/05155108/React-Hooks.png");
-    //zelda botw wallpaper
-    background: url("https://cdn.wallpapersafari.com/73/40/u4rW8T.jpg") no-repeat fixed center; 
-    //majora wallpaper
-//  background: url("https://wallpapercave.com/wp/wp9037152.jpg") no-repeat fixed center;
-    background-size: min-width(100%) 100vh;
+  
+  //react hook wallpaper
+  //  background-image: url("https://dkrn4sk0rn31v.cloudfront.net/uploads/2019/09/05155108/React-Hooks.png");
+  //majora wallpaper
+  //  background: url("https://wallpapercave.com/wp/wp9037152.jpg") no-repeat fixed center;
+  //green hyrule emblem
+    background: #6D8B67 url("https://i.pinimg.com/originals/78/01/a4/7801a48ff2567d6e3f4e287eaefc581e.jpg") no-repeat fixed center; 
+
+    background-size: 90%;
   }
   .background-box {
     width: 30vw;
