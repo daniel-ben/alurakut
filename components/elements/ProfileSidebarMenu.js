@@ -6,7 +6,7 @@ const BASE_URL = 'http://alurakut.vercel.app/';
 const v = '1';
 
 
-function ProfileSidebarMenu() {
+function ProfileSidebarMenu(props) {
   const router = useRouter();
   return (
     <ProfileSidebarMenu.Wrapper>
@@ -29,7 +29,7 @@ function ProfileSidebarMenu() {
           </a>  
         <a href="">
           <img src={`${BASE_URL}/icons/sun.svg`} />
-            Depoimentos
+            Depoimentos ({props.numOf})
           </a>
         <a href="/">
           <img src={`${BASE_URL}/icons/book.svg`} />

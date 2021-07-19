@@ -3,7 +3,7 @@ import Box from '../elements/Box';
 import ProfileSidebarMenu from '../elements/ProfileSidebarMenu';
 
 function ProfileSidebar(props) {
-
+  const numOf = props.depoimentos.length;
   return (
     <Box as="aside">
       <img src={`https://github.com/${props.githubUser}.png`} style={{ borderRadius: '8px' }} />
@@ -14,7 +14,7 @@ function ProfileSidebar(props) {
       </a>
       <hr />
 
-      <ProfileSidebarMenu />
+      <ProfileSidebarMenu numOf={numOf}/>
     </Box>
   )
 }

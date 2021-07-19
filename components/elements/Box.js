@@ -66,11 +66,15 @@ const Box = styled.div`
   textarea {
     border-radius: 20px;
     border-style: none;
-    font-size: .8rem;
+    color: #333333;
     height: 15em;
     margin-bottom: 10px;
     padding: 10px;
     width: 100%;
+    ::placeholder {
+      color: #333333;
+      opacity: 1;
+    }
   }
 
   button {

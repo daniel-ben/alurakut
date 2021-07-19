@@ -13,20 +13,22 @@ import NovaComunidadeForm from '../modules/NovaComunidadeForm';
 import WelcomeArea from '../modules/WelcomeArea';
 import ProfileSidebar from '../modules/ProfileSidebar';
 import ProfileRelationsBox from '../modules/ProfileRelationsBox';
-
+import ShowDepoimentos from '../modules/ShowDepoimentos';
 
 function MainGrid(props) {
 
   const [following, setFollowing] = React.useState([]);
   const [followers, setFollowers] = React.useState([]);
   const [comunidades, setComunidades] = React.useState([]);
-  const [depoimentos, setDepoimentos] = React.useState([]);
+  const [depoimentos, setDepoimentos] = React.useState([0]);
+  const [recados, setRecados] = React.useState([0]);
 
   const [opção_selecionada, setOpçao] = React.useState();
 
   const opções = [
      <NovaComunidadeForm  comunidades={comunidades} 
-                          setComunidades={setComunidades}/>,
+                          setComunidades={setComunidades}
+                          githubUser={props.githubUser}/>,
      <NovoDepoimento  depoimentos={depoimentos} 
                       setDepoimentos={setDepoimentos} 
                       githubUser={props.githubUser}/>,
@@ -36,7 +38,7 @@ function MainGrid(props) {
   React.useEffect(() => { 
     fetchFromApi(setFollowing, props.githubUser, 'following');
     fetchFromApi(setFollowers, props.githubUser, 'followers');
-    fetchFromDato(setComunidades, tokens.READ_ONLY);
+    fetchFromDato(setComunidades, setDepoimentos, tokens.READ_ONLY);
   }, [])
 
   return (
@@ -44,7 +46,8 @@ function MainGrid(props) {
 
         {/* perfil */}
         <div className="profileArea" style={{ gridArea: 'profileArea' }}>
-          {<ProfileSidebar githubUser={props.githubUser} />}
+          {<ProfileSidebar  githubUser={props.githubUser} 
+                            depoimentos={depoimentos} />}
         </div>
 
         {/* conteúdo */}
@@ -74,6 +77,9 @@ function MainGrid(props) {
             
             {opções[opção_selecionada]}
           </Box>
+          
+          <ShowDepoimentos depoimentos={depoimentos} />
+          
         </div>
 
         {/* Lateral Direita */}

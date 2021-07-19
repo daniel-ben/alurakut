@@ -1,10 +1,10 @@
-function CriaDepoimento(depoimentos, setDepoimentos, githubUser) {
+function CriaDepoimento(githubUser, depoimentos, setDepoimentos) {
   const dadosDoForm = new FormData(event.target);
 
   const depoimento = {
     title: dadosDoForm.get('title'),
     content: dadosDoForm.get('content'),
-    creatorSlug: githubUser,
+    crea: githubUser,
     imageUrl: `https://github.com/${githubUser}.png`,
   };
 

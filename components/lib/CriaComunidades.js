@@ -1,11 +1,11 @@
 
-function CriaComunidades(comunidades, setComunidades) {
+function CriaComunidades(githubUser, comunidades, setComunidades) {
   const dadosDoForm = new FormData(event.target);
 
   const comunidade = {
     title: dadosDoForm.get('title'),
     imageUrl: dadosDoForm.get('image'),
-    creatorSlug: 'daniel-ben',
+    creatorSlug: githubUser,
     linkTo: '',
   };
 

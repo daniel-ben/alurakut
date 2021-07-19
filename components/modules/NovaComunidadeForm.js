@@ -8,7 +8,7 @@ function NovaComunidadeForm(props) {
   return (
     <form onSubmit={(event) => {
       event.preventDefault();
-      CriaComunidades(props.comunidades, props.setComunidades)
+      CriaComunidades(props.githubUser, props.comunidades, props.setComunidades)
     }}>
 
       <div>

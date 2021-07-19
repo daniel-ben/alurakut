@@ -9,7 +9,7 @@ export default async function recebedorDeRequests(request, response) {
     const client = new SiteClient(TOKEN);
 
     const registroCriado = await client.items.create({
-      itemType: "967802",
+      itemType: "976621", //id do modelo
       ...request.body,
     })
 
